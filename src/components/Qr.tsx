@@ -12,7 +12,7 @@ const Qr: FC = () => {
       }}
     >
       <QRCode size={120} value={"AAAA"} />
-      <p style={{ margin: "0", padding: "0" }}>AAAA</p>
+      <p style={{ margin: "0", padding: "0", textAlign: "center" }}>AAAA</p>
     </div>
   );
 };
