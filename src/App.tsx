@@ -1,6 +1,7 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef } from "react";
+import { Qr, Barcode } from ".";
 
 export function App() {
   /** PDF化する対象の要素を参照するための useRef */
@@ -71,6 +72,10 @@ export function App() {
           <p style={{ margin: "0px", padding: "5px 0" }}>
             この部分がPDFとして出力されます。
           </p>
+          <Qr />
+          <br />
+          <br />
+          <Barcode />
         </div>
         {/* PDFに変換する対象のエリア end */}
       </div>
