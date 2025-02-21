@@ -1,18 +1,6 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { useRef, useState } from "react";
-import ReactModal from "react-modal";
-
-ReactModal.setAppElement("#root");
-
-const PDFComponent = () => {
-  return (
-    <div>
-      <h1>PDF化するコンテンツ</h1>
-      <p>この部分がPDFとして出力されます。</p>
-    </div>
-  );
-};
+import { useRef } from "react";
 
 export function App() {
   /** PDF化する対象の要素を参照するための useRef */
@@ -51,76 +39,57 @@ export function App() {
       console.error(e);
     }
   };
-  /** Modal処理 **/
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const handleIsOpen = () => {
-    setIsOpen(true);
-  };
-  const handleIsClose = () => {
-    setIsOpen(false);
-  };
-
   return (
     <>
-      <ReactModal
-        isOpen={modalIsOpen}
-        onRequestClose={handleIsClose}
-        contentLabel="Modal2"
+      <h2>Preview Summary</h2>
+      <div
         style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          },
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            transform: "translate(-50%, -50%)",
-            width: "90%",
-            minWidth: "320px",
-            maxWidth: "900px",
-            margin: "0",
-            padding: "0",
-            border: "none",
-            backgroundColor: "rgba(0, 0, 0, 0)",
-          },
+          width: "100%",
+          maxWidth: "1000px",
+          height: "300px",
+          margin: "0 auto 0 auto",
+          padding: "0",
+          overflowX: "scroll",
+          overflowY: "scroll",
+          border: "1px solid black",
         }}
       >
-        <button
-          onClick={handleIsClose}
+        {/* PDFに変換する対象のエリア start */}
+        <div
+          ref={contentRef}
           style={{
-            width: "100%",
-            padding: "0",
-            margin: "0",
-            border: "none",
-            backgroundColor: "rgba(0, 0, 0, 0)",
+            aspectRatio: "210 / 297",
+            width: "auto",
+            height: "891px",
+            margin: "0 auto",
+            backgroundColor: "skyblue",
           }}
         >
-          {/* PDFに変換する対象のエリア start */}
-          <div
-            ref={contentRef}
-            style={{
-              aspectRatio: "210 / 297",
-              maxHeight: "90vh",
-              margin: "0 auto",
-              backgroundColor: "skyblue",
-            }}
-          >
-            <h2 style={{ margin: "0px", padding: "10px 0" }}>
-              PDF化するコンテンツ
-            </h2>
-            <p style={{ margin: "0px", padding: "5px 0" }}>
-              この部分がPDFとして出力されます。
-            </p>
-          </div>
-          {/* PDFに変換する対象のエリア end */}
-        </button>
-      </ReactModal>
+          <h2 style={{ margin: "0px", padding: "10px 0" }}>
+            PDF化するコンテンツ
+          </h2>
+          <p style={{ margin: "0px", padding: "5px 0" }}>
+            この部分がPDFとして出力されます。
+          </p>
+        </div>
+        {/* PDFに変換する対象のエリア end */}
+      </div>
 
-      {/* モーダルボタン */}
-      <button onClick={handleIsOpen}>PDFのプレビュー</button>
       {/* PDFダウンロードボタン */}
-      <button onClick={handleDownloadPdf}>PDFをダウンロード</button>
+      <div style={{ width: "100%" }}>
+        <button
+          onClick={handleDownloadPdf}
+          style={{
+            width: "200px",
+            height: "50px",
+            fontSize: "18px",
+            margin: "10px auto 0 auto",
+            display: "block",
+          }}
+        >
+          PDFをダウンロード
+        </button>
+      </div>
     </>
   );
 }
