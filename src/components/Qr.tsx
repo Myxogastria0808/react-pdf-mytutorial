@@ -6,15 +6,16 @@ const Qr: FC = () => {
     <div
       style={{
         display: "inline-block",
-        margin: "44.6px 0 0 52.5px",
-        padding: "10px",
-        backgroundColor: "white",
+        margin: "45px 0 0 23px",
+        padding: "10px 10px 0 10px",
+        //BUG: https://github.com/niklasvh/html2canvas/issues/2739
+        // backgroundColor: "white",
         height: "147px",
-        border: "2px dashed rgb(107, 107, 107)",
+        border: "2px solid rgb(0, 0, 0)",
       }}
     >
       <QRCode
-        size={120}
+        size={100}
         value={"AAAA"}
         bgColor={"#FFFFFF"}
         fgColor={"#ED6D1F"}
@@ -24,8 +25,9 @@ const Qr: FC = () => {
           margin: "0",
           padding: "0",
           textAlign: "center",
-          fontSize: "18px",
+          fontSize: "27px",
           fontFamily: "ZeroXProto",
+          fontWeight: "bold",
         }}
       >
         AAAA

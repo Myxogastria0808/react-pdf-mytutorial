@@ -2,7 +2,6 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef } from "react";
 import { Qr, Barcode } from ".";
-import "./components/0xProto-Regular-normal.js";
 
 export function App() {
   /** PDF化する対象の要素を参照するための useRef */
@@ -12,33 +11,30 @@ export function App() {
     if (!contentRef.current) return;
 
     try {
-      // 1️⃣ 指定した要素をキャプチャしてCanvasに変換
-      const canvas = await html2canvas(contentRef.current);
+      // 1️: 指定した要素をキャプチャしてCanvasに変換
+      const canvas: HTMLCanvasElement = await html2canvas(contentRef.current);
 
-      // 2️⃣ Canvasを画像として取得（Base64のPNGデータ）
-      const imageData = canvas.toDataURL("image/png");
+      // 2: jsPDF インスタンスを作成（A4縦向き）
+      const pdf: jsPDF = new jsPDF({
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
+      });
 
-      // 3️⃣ jsPDF インスタンスを作成（A4縦向き）
-      const pdf = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
+      // 3: PDFの幅を取得し、アスペクト比を維持した高さを計算
+      const pdfWidth: number = pdf.internal.pageSize.getWidth();
+      const pdfHeight: number = (canvas.height * pdfWidth) / canvas.width;
 
-      // 4️⃣ Fontを追加
-      pdf.setFont("ZeroXProto");
-
-      // 5️⃣ PDFの幅を取得し、アスペクト比を維持した高さを計算
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      // 6️⃣ 画像をPDFに追加（左上から配置）
+      // 4: canvasをPDFに追加（左上から配置）
       pdf.addImage({
-        imageData: imageData,
-        format: "PNG",
+        imageData: canvas,
         x: 0,
         y: 0,
         width: pdfWidth,
         height: pdfHeight,
       });
 
-      // PDFをダウンロード
+      // 5: PDFをダウンロード
       pdf.save("dashi-record.pdf");
     } catch (e) {
       console.error(e);
@@ -50,7 +46,7 @@ export function App() {
       <div
         style={{
           width: "100%",
-          maxWidth: "1000px",
+          maxWidth: "1200px",
           height: "300px",
           margin: "0 auto 0 auto",
           padding: "0",
@@ -65,12 +61,16 @@ export function App() {
           style={{
             aspectRatio: "210 / 297",
             width: "auto",
-            height: "891px",
+            height: "1485px",
             margin: "0 auto",
             backgroundColor: "#FFFFFF",
             border: "1px solid black",
           }}
         >
+          {/* 49コ */}
+          {/* <Qr />
+          <Qr />
+          <Qr />
           <Qr />
           <Qr />
           <Qr />
@@ -80,28 +80,108 @@ export function App() {
           <Qr />
           <Qr />
           <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
 
           <Qr />
           <Qr />
           <Qr />
           <Qr />
-          {/* <Barcode />
+          <Qr />
+          <Qr />
+          <Qr />
+
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr /> */}
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
           <Barcode />
 
           <Barcode />
           <Barcode />
-
           <Barcode />
-          <Barcode />
-
           <Barcode />
           <Barcode />
 
           <Barcode />
           <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
 
           <Barcode />
-          <Barcode /> */}
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+          <Barcode />
+          <Barcode />
         </div>
         {/* PDFに変換する対象のエリア end */}
       </div>

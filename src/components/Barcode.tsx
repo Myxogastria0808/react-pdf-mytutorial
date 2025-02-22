@@ -6,23 +6,25 @@ const Barcode: FC = () => {
     <div
       style={{
         display: "inline-block",
-        margin: "41px 0 0 92px",
-        padding: "10px",
-        backgroundColor: "white",
-        height: "77px",
-        border: "2px dashed rgb(107, 107, 107)",
+        margin: "67.90909px 0 0 23.66667px",
+        padding: "5px 10px 5px 10px",
+        //BUG: https://github.com/niklasvh/html2canvas/issues/2739
+        // backgroundColor: "white",
+        height: "60px",
+        border: "2px solid rgb(0, 0, 0)",
       }}
     >
       <ReactBarcode
         value={"AAAA"}
         options={{
           format: "code128",
-          height: 50,
+          height: 35,
           displayValue: false,
           lineColor: "#ED6D1F",
           margin: 0,
         }}
       />
+
       <p
         style={{
           margin: "0",
@@ -30,6 +32,7 @@ const Barcode: FC = () => {
           textAlign: "center",
           fontSize: "18px",
           fontFamily: "ZeroXProto",
+          fontWeight: "bold",
         }}
       >
         AAAA
