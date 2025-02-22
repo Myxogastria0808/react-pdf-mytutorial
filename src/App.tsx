@@ -124,6 +124,7 @@ export function App() {
           <Qr />
           <Qr /> */}
 
+          {/* 49コ */}
           <Barcode />
           <Barcode />
           <Barcode />
