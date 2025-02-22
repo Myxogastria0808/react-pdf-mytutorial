@@ -2,6 +2,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef } from "react";
 import { Qr, Barcode } from ".";
+import "./components/0xProto-Regular-normal.js";
 
 export function App() {
   /** PDF化する対象の要素を参照するための useRef */
@@ -20,11 +21,14 @@ export function App() {
       // 3️⃣ jsPDF インスタンスを作成（A4縦向き）
       const pdf = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
 
-      // 4️⃣ PDFの幅を取得し、アスペクト比を維持した高さを計算
+      // 4️⃣ Fontを追加
+      pdf.setFont("ZeroXProto");
+
+      // 5️⃣ PDFの幅を取得し、アスペクト比を維持した高さを計算
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-      // 5️⃣ 画像をPDFに追加（左上から配置）
+      // 6️⃣ 画像をPDFに追加（左上から配置）
       pdf.addImage({
         imageData: imageData,
         format: "PNG",
@@ -34,7 +38,7 @@ export function App() {
         height: pdfHeight,
       });
 
-      // 6️⃣ PDFをダウンロード
+      // PDFをダウンロード
       pdf.save("dashi-record.pdf");
     } catch (e) {
       console.error(e);
@@ -63,19 +67,41 @@ export function App() {
             width: "auto",
             height: "891px",
             margin: "0 auto",
-            backgroundColor: "skyblue",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid black",
           }}
         >
-          <h2 style={{ margin: "0px", padding: "10px 0" }}>
-            PDF化するコンテンツ
-          </h2>
-          <p style={{ margin: "0px", padding: "5px 0" }}>
-            この部分がPDFとして出力されます。
-          </p>
           <Qr />
-          <br />
-          <br />
+          <Qr />
+          <Qr />
+          <Qr />
+
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+
+          <Qr />
+          <Qr />
+          <Qr />
+          <Qr />
+          {/* <Barcode />
           <Barcode />
+
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode />
+
+          <Barcode />
+          <Barcode /> */}
         </div>
         {/* PDFに変換する対象のエリア end */}
       </div>
